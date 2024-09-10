@@ -11,7 +11,7 @@ import SwiftUI
 struct MoviesAppSwiftUICombineAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(httpClient: HTTPClient())
         }
     }
 }
