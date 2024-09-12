@@ -41,25 +41,28 @@ struct ContentView: View {
     }
     
     var body: some View {
-        List(movies) { movie in
-            HStack {
-                AsyncImage(url: movie.poster) { image in
-                    image.resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 75, height: 75)
-                } placeholder: {
-                    ProgressView()
+        NavigationStack {
+            List(movies) { movie in
+                HStack {
+                    AsyncImage(url: movie.poster) { image in
+                        image.resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 75, height: 75)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    Text(movie.title)
                 }
-                Text(movie.title)
             }
-        }
-        .onAppear {
-            setupSearchPublisher()
-        }
-        .searchable(text: $search)
+            .onAppear {
+                print("hello onAppear")
+                setupSearchPublisher()
+            }
+            .searchable(text: $search)
             .onChange(of: search) {
                 searchSubject.send(search)
             }
+        }
     }
 }
 
